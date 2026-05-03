@@ -11,9 +11,9 @@ and in the header we have
 4. no of suoer blocks used(derived from the fomula [%of superblocks used/total amt of superblocks] where %of superblocks used is no of blocks in a superblock used over 512)
 5. reserved(this is to ensure that the header is exactly 512 bytes long[1 block])
 
-the magic is "GOSFSG*s\
+the magic is GOSFSG*s\
 the version is currently at one\
-no of super blocks is how you can determine the partation size or set partition size as each superblock is responsible for 512(bytes[the size of a block])*512(blocks) = 262144bytes so partation size can only be in mutiples of 262144 _may change in the future with metadata(discussed later)_\
+no of super blocks is how you can determine the partation size or set partition size as each superblock is responsible for 512(bytes[the size of a block])\*512(blocks) = 262144bytes so partation size can only be in mutiples of 262144 \_may change in the future with metadata(discussed later)*\
 no of super blocks used is to show how much disk is used and left with left being derived from(no of super blocks used - no of super blocks)
 
 the super_block is how we tell is a block is used\
