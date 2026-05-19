@@ -18,15 +18,18 @@ no of super blocks used is to show how much disk is used and left with left bein
 
 the super_block is how we tell is a block is used<br/>
 the data will be stored in this format<br/>
-0qwwwwwww<br/>
-where q is where the bit for used is stored(in a hex editor it looks like 80 for 0b10000000)<br/>
-w is where metadata will be stored(not yet implemnted)
 
 in the sectors that store the files data we have
 
 1. filename up to 255char long(ONLY ASCII)
 2. the extension up to 15char long (ONLY ASCII oso)
-3. flags (might be removed cos of the w bits in the superblocks)
+3. flags used for metadata
+   we will use the 4 bytes like this 0babcdefgh
+   h will indicate if it is file or dir
+   g is dependent on h if h is a dir(1) then g is the symlink flag 1 is true 0 is false
+   if h is a file(0) then g is executable flag 1 is true 0 is false
+   f is the flag that controls if the file/dir is hidden
+   e is the flag for compressed flags
 4. encoding (could be stored in the w bits in the superblocks)
 5. the size of the file (size in bytes e.g. for 10kb -> 10000b)
 6. start sector(might be shrunk and changed to relative to the superblock)
@@ -34,7 +37,6 @@ in the sectors that store the files data we have
 8. data(squeeze out some space to store data)
 
 next steps(as in i nvr implement yet)
+splitting files into many chunks NOT bef and aft one another(prob using meta(like if d bit 1 is 1 then look for first sector) using extent tbls)
 stitching files
-metadata
-splitting files into many chunks NOT bef and aft one another(prob using meta(like if w bit 1 is 1 then look for first 16(eg) bytes of the data for where the next seg is then do that prograssively))
 dirs plan to implement that the dirs will store the addr of the files inside and the parent dir and files will store addr of their parent dir so that will oso work for sys links
